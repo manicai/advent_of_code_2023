@@ -27,15 +27,16 @@ def all_true(iter):
             return False
     return True
 
-with open(sys.argv[1], 'r', encoding='ascii') as fh:
-    total = 0
-    for line in fh.readlines():
-        game, draws = line.strip().split(':')
-        game_number = int(game[5:])
-        draws = parse_draws(draws)        
-        possible = all_true(is_possible(draw) for draw in draws)
-        print(game_number, draws, possible)
-        if possible:
-            total += game_number
-    
-    print(total)
+if __name__=='__main__':
+    with open(sys.argv[1], 'r', encoding='ascii') as fh:
+        total = 0
+        for line in fh.readlines():
+            game, draws = line.strip().split(':')
+            game_number = int(game[5:])
+            draws = parse_draws(draws)        
+            possible = all_true(is_possible(draw) for draw in draws)
+            print(game_number, draws, possible)
+            if possible:
+                total += game_number
+        
+        print(total)
