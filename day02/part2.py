@@ -3,17 +3,17 @@ import sys
 
 from part1 import parse_draws
 
-with open(sys.argv[1], 'r', encoding='ascii') as fh:
+with open(sys.argv[1], "r", encoding="ascii") as fh:
     total = 0
-    
+
     for line in fh.readlines():
-        game, draws = line.strip().split(':')
+        game, draws = line.strip().split(":")
         game_number = int(game[5:])
-        draws = parse_draws(draws)        
+        draws = parse_draws(draws)
 
         combined = {}
         for draw in draws:
-            for ball, count in draw.items():    
+            for ball, count in draw.items():
                 combined.setdefault(ball, []).append(count)
 
         highest = {}
@@ -24,5 +24,5 @@ with open(sys.argv[1], 'r', encoding='ascii') as fh:
         power = math.prod(highest.values())
         # print(power)
         total += power
-    
-    print(f'----\n{total}')
+
+    print(f"----\n{total}")
