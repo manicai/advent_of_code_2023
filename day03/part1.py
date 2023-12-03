@@ -20,7 +20,7 @@ class Plan:
     def row(self, index):
         return self._grid[index]
 
-    def at(self, col, row):
+    def at(self, row, col) -> str:
         # For ease put an imaginary boundary of '.' around the plan
         if row < 0 or row >= len(self._grid):
             return "."
@@ -39,13 +39,13 @@ def is_part(cell):
 
 
 def is_symbol(plan, row_idx, start_col, end_col):
-    neighbours = [(start_col - 1, row_idx), (end_col + 1, row_idx)]
+    neighbours = [(row_idx, start_col - 1), (row_idx, end_col + 1)]
     for col in range(start_col - 1, end_col + 2):
-        neighbours.append((col, row_idx - 1))
-        neighbours.append((col, row_idx + 1))
+        neighbours.append((row_idx - 1, col))
+        neighbours.append((row_idx + 1, col))
 
-    for n_c, n_r in neighbours:
-        if is_part(plan.at(n_c, n_r)):
+    for n_r, n_c in neighbours:
+        if is_part(plan.at(n_r, n_c)):
             return True
     return False
 
@@ -62,7 +62,6 @@ def scan_row(plan, row_idx):
                 start_idx = i
         else:
             if current != 0:  # Finished reading number
-                indices = (start_idx, i - 1)
                 symbol = is_symbol(plan, row_idx, start_idx, i - 1)
                 values.append((current, symbol))
                 start_idx = None
