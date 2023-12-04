@@ -10,18 +10,22 @@ def process_line(line):
     matches = winning.intersection(have)
     score = 2 ** (len(matches) - 1) if matches else 0
     # print(matches, score)
-    return card, winning, have, score
+    return card, winning, have, matches, score
 
 
 def find_scores(lines):
     # print("\n".join(lines))
-    total = 0
-    for line in lines:
-        _, _, _, score = process_line(line)
-        # print(line.strip(), score)
-        total += score
-    print(total)
-    return total
+    count = [1 for _ in range(len(lines))]
+    for i, line in enumerate(lines):
+        _, _, _, matches, score = process_line(line)
+        # print(line.strip(), len(matches))
+        match_count = len(matches)
+        for add in range(i + 1, i + 1 + match_count):
+            count[add] += count[i]
+
+    # print(count)
+    print(sum(count))
+    return sum(count)
 
 
 if __name__ == "__main__":
