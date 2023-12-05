@@ -13,7 +13,7 @@ def process_line(line):
     return card, winning, have, matches, score
 
 
-def find_scores(lines):
+def count_cards(lines):
     # print("\n".join(lines))
     count = [1 for _ in range(len(lines))]
     for i, line in enumerate(lines):
@@ -29,4 +29,4 @@ def find_scores(lines):
 
 
 if __name__ == "__main__":
-    run_script(find_scores)
+    run_script(count_cards)
