@@ -1,5 +1,6 @@
 import datetime
 import os
+import pathlib as path
 import sys
 
 import requests
@@ -7,13 +8,13 @@ import requests
 
 def download_input():
     if os.path.exists(cached_input()):
-        print("No download required")
+        print("Input data already cached, no download required")
         return
 
     session_cookie = os.environ["AOC_COOKIE"]
     cookies = {"session": session_cookie}
     url = f"https://adventofcode.com/{year()}/day/{today()}/input"
-    print(url)
+    print("Fetching data from", url)
     response = requests.get(url, cookies=cookies)
     assert (
         response.status_code == 200
@@ -30,8 +31,13 @@ def today():
     return datetime.datetime.now().day
 
 
+def inputs_dir(day=today()):
+    root = path.Path(os.environ['AOC_ROOT'])
+    return root / f"inputs/day_{day:02}"
+
+                                
 def cached_input():
-    return f"../inputs/day_{today():02}/input.txt"
+    return inputs_dir() / "input.txt"
 
 
 def run_script(func):
