@@ -18,19 +18,20 @@ part1_template = f"""import aoc
 def part1(input):
     pass
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     aoc.run_script(part1)
 """
 
 part2_template = f"""import aoc
 import part1
-
 {standard_imports}
 
 def part2(input):
     pass
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     aoc.run_script(part2)
 """
 
