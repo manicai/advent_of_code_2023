@@ -19,6 +19,13 @@ class LazyMapRange:
         offset = key - self.key_start
         return self.value_start + offset
 
+    def __str__(self):
+        return f"[{self.key_start}:{self.key_start + self.length}] -> {self.value_start}"
+
+    def __repr__(self):
+        return str(self)
+    
+
 class LazyMap:
     def __init__(self):
         self.ranges = []
@@ -36,8 +43,9 @@ class LazyMap:
     
     def value_for(self, key):
         r = self._find_range(key)
-        assert r
-        return r.value_for(key)
+        if r:
+            return r.value_for(key)
+        return key
 
 
 def part1(input):
