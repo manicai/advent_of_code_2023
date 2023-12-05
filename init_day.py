@@ -18,8 +18,11 @@ part1_template = f"""import aoc
 def part1(input):
     pass
 
+def test():
+    pass
 
 if __name__ == "__main__":
+    test()
     aoc.run_script(part1)
 """
 
@@ -30,8 +33,11 @@ import part1
 def part2(input):
     pass
 
+def test():
+    pass
 
 if __name__ == "__main__":
+    test()
     aoc.run_script(part2)
 """
 
