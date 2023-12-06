@@ -55,3 +55,7 @@ def run_script(func):
         lines = [l.strip() for l in fh.readlines()]
 
     func(lines)
+
+
+def to_ints(lst):
+    return [int(n) for n in lst]
