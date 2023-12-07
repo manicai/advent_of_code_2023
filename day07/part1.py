@@ -33,8 +33,8 @@ def hand_score(hand):
     for c in hand:
         counts[c] += 1
     pattern = tuple(sorted(counts.values()))
-    print(counts.values(), pattern, pattern_score[pattern])
-    print(pattern_score[pattern] + tie_break(hand))
+    # print(counts.values(), pattern, pattern_score[pattern])
+    # print(pattern_score[pattern] + tie_break(hand))
     return pattern_score[pattern] + tie_break(hand)
 
 
@@ -53,14 +53,12 @@ def part1(input):
     total = 0
     assert len(hands) == len(set(x[1] for x in hands)), "No duplicate scores"
     assert len(hands) == len(set(x[0] for x in hands)), "No duplicate hands"
-    assert len(hands) == 1000
     for rank, (hand, score, bet) in enumerate(hands):
         assert bet > 0
         total += bet * (rank + 1)
-        print(rank + 1, hand, score, bet, total)
+        # print(rank + 1, hand, score, bet, total)
     print(total)
 
 
 if __name__ == "__main__":
-    test()
     aoc.run_script(part1)
