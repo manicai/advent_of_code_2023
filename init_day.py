@@ -2,6 +2,7 @@ import os
 import pathlib as path
 
 import requests
+import bs4
 
 import aoc
 
@@ -41,7 +42,7 @@ if __name__ == "__main__":
     aoc.run_script(part2)
 """
 
-
+code_dir = path.Path(f"day{aoc.today():02}")
                                 
 def download_tests(day=aoc.today(), year=aoc.year()):
     problem_url = f"https://adventofcode.com/{year}/day/{day}"
@@ -55,6 +56,16 @@ def download_tests(day=aoc.today(), year=aoc.year()):
             with open(problem_file, 'w') as fh:
                 fh.write(response.text)
 
+    with open(problem_file, 'r') as fh:
+        soup = bs4.BeautifulSoup(fh, features="html.parser")
+    
+    if len(soup.main.find_all('pre')) == 1:
+        with open(code_dir / 'test.txt', 'w') as fh:
+            fh.write(soup.main.pre.text)
+    else:
+        for i, block in enumerate(soup.main.find_all('pre')):
+            with open(code_dir / f'test.txt_{i}', 'w') as fh:
+                fh.write(block.text)
 
 if __name__ == "__main__":
     root = path.Path(os.environ['AOC_ROOT'])
@@ -63,7 +74,6 @@ if __name__ == "__main__":
     aoc.download_input()
     download_tests()
 
-    code_dir = path.Path(f"day{aoc.today():02}")
     path.Path.mkdir(code_dir, exist_ok=True)
     part1 = code_dir / "part1.py"
     if not part1.is_file():
