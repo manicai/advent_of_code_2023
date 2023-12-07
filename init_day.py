@@ -13,33 +13,39 @@ import math
 import re
 """
 
-part1_template = f"""import aoc
+templates = {}
+
+templates['part1'] = f"""import aoc
 {standard_imports}
 
 def part1(input):
     pass
 
-def test():
-    pass
 
 if __name__ == "__main__":
     test()
     aoc.run_script(part1)
 """
 
-part2_template = f"""import aoc
+templates['part2'] = f"""import aoc
 import part1
 {standard_imports}
 
 def part2(input):
     pass
 
-def test():
-    pass
 
 if __name__ == "__main__":
     test()
     aoc.run_script(part2)
+"""
+
+test_template = """from {} import *
+import pytest
+
+
+def test():
+    pass
 """
 
 code_dir = path.Path(f"day{aoc.today():02}")
@@ -53,38 +59,40 @@ def download_tests(day=aoc.today(), year=aoc.year()):
             print(f"Failed to get problem statement ({response.status_code}):", 
                 response.text)
         else:
-            with open(problem_file, 'w') as fh:
+            with open(problem_file, 'w', encoding=response.encoding) as fh:
                 fh.write(response.text)
 
     with open(problem_file, 'r') as fh:
         soup = bs4.BeautifulSoup(fh, features="html.parser")
-    
+
+
     if len(soup.main.find_all('pre')) == 1:
         with open(code_dir / 'test.txt', 'w') as fh:
             fh.write(soup.main.pre.text)
     else:
         for i, block in enumerate(soup.main.find_all('pre')):
-            with open(code_dir / f'test.txt_{i}', 'w') as fh:
+            with open(code_dir / f'test.txt_{i}', 'w', encoding='utf8') as fh:
                 fh.write(block.text)
 
 if __name__ == "__main__":
     root = path.Path(os.environ['AOC_ROOT'])
 
     path.Path.mkdir(aoc.inputs_dir(), parents=True, exist_ok=True)
-    aoc.download_input()
-    download_tests()
+    # aoc.download_input()
 
     path.Path.mkdir(code_dir, exist_ok=True)
-    part1 = code_dir / "part1.py"
-    if not part1.is_file():
-        with open(part1, "w") as fh:
-            fh.write(part1_template)
-    else:
-        print(f"Part 1 template {part1} already exists")
+    download_tests()
+    for part in templates:
+        code_file = code_dir / f"{part}.py"
+        if not code_file.is_file():
+            with open(code_file, "w") as fh:
+                fh.write(templates[part])
+        else:
+            print(f"Template {code_file} already exists")
 
-    part2 = code_dir / "part2.py"
-    if not part2.is_file():
-        with open(part2, "w") as fh:
-            fh.write(part2_template)
-    else:
-        print(f"Part 2 template {part2} already exists")
+        test_file = code_dir / f"test_{part}.py"
+        if not test_file.is_file():
+            with open(test_file, "w") as fh:
+                fh.write(test_template.format(part))
+        else:
+            print(f"Test template {test_file} already exists")
