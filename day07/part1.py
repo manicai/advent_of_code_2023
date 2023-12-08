@@ -6,21 +6,24 @@ import itertools
 import math
 import re
 
-cards = 'AKQJT987654332'
+cards = "AKQJT987654332"
+
 
 def card_score(card):
     # assert card in cards, card
     return 13 - cards.index(card)
 
+
 pattern_score = {
-    (5,):        8_000_000,
-    (1,4):       7_000_000,
-    (2,3):       6_000_000,
-    (1,1,3):     5_000_000,
-    (1,2,2):     4_000_000,
-    (1,1,1,2):   3_000_000,
-    (1,1,1,1,1): 2_000_000,
+    (5,): 8_000_000,
+    (1, 4): 7_000_000,
+    (2, 3): 6_000_000,
+    (1, 1, 3): 5_000_000,
+    (1, 2, 2): 4_000_000,
+    (1, 1, 1, 2): 3_000_000,
+    (1, 1, 1, 1, 1): 2_000_000,
 }
+
 
 def tie_break(hand):
     t = sum(card_score(c) * 14 ** (4 - i) for i, c in enumerate(hand))
@@ -39,7 +42,7 @@ def hand_score(hand):
 
 
 def process_line(line):
-    hand, bet = line.split(' ')
+    hand, bet = line.split(" ")
     return hand, hand_score(hand), int(bet)
 
 

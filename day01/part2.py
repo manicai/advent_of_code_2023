@@ -1,11 +1,9 @@
 import sys
 
-NAMES = [
-    'zero', 'one', 'two', 'three', 'four', 'five',
-    'six', 'seven', 'eight', 'nine'
-]
+NAMES = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
 
-assert NAMES[9] == 'nine'
+assert NAMES[9] == "nine"
+
 
 def lowest_found(a, b):
     # Lowest of two indices from `.find` ignoring -1
@@ -17,16 +15,18 @@ def lowest_found(a, b):
         return a
     else:
         return min(a, b)
-    
+
+
 def highest_found(a, b):
     # Highest of two indices from `.rfind` ignoring -1
     if a == -1 and b == -1:
         return None
     return max(a, b)
 
+
 def find_numbers(line):
-    '''Find all the lowest and high index for the occurrence of
-    each digit in a line of text.'''
+    """Find all the lowest and high index for the occurrence of
+    each digit in a line of text."""
     indices = [None for _ in range(10)]
     for digit in range(10):
         l_numeric = line.find(str(digit))
@@ -35,12 +35,13 @@ def find_numbers(line):
         r_name = line.rfind(NAMES[digit])
         indices[digit] = (
             lowest_found(l_name, l_numeric),
-            highest_found(r_name, r_numeric)
+            highest_found(r_name, r_numeric),
         )
     return indices
 
+
 in_path = sys.argv[1]
-with open(in_path, 'r') as in_file:
+with open(in_path, "r") as in_file:
     total = 0
     for line in in_file.readlines():
         # print(line.strip(), end='\t')
@@ -60,7 +61,7 @@ with open(in_path, 'r') as in_file:
                 (value, index) = first
                 if index > min_i:
                     first = (i, min_i)
-            
+
             if last is None:
                 last = (i, max_i)
             else:
@@ -70,9 +71,9 @@ with open(in_path, 'r') as in_file:
         first_number, _ = first
         last_number, _ = last
         # print(first, last)
-        
+
         calibration_value = first_number * 10 + last_number
         # print(calibration_value)
         total += calibration_value
-    
+
     print(total)

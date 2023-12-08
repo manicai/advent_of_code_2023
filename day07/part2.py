@@ -20,9 +20,8 @@ def tie_break(hand):
     return t
 
 
-
 def process_line(line):
-    hand, bet = line.split(' ')
+    hand, bet = line.split(" ")
     return hand, hand_score(hand), int(bet)
 
 
@@ -30,7 +29,7 @@ def hand_score(hand):
     counts = collections.defaultdict(lambda: 0)
     joker_count = 0
     for c in hand:
-        if c == 'J':
+        if c == "J":
             joker_count += 1
         else:
             counts[c] += 1

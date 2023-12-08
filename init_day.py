@@ -17,7 +17,9 @@ import re
 
 templates = {}
 
-templates['part1'] = f"""import aoc
+templates[
+    "part1"
+] = f"""import aoc
 {standard_imports}
 
 def part1(input):
@@ -28,7 +30,9 @@ if __name__ == "__main__":
     aoc.run_script(part1)
 """
 
-templates['part2'] = f"""import aoc
+templates[
+    "part2"
+] = f"""import aoc
 import part1
 {standard_imports}
 
@@ -49,35 +53,39 @@ def test():
 """
 
 code_dir = path.Path(f"day{aoc.today():02}")
-                                
+
+
 def download_tests(day=aoc.today(), year=aoc.year()):
     problem_url = f"https://adventofcode.com/{year}/day/{day}"
-    problem_file = aoc.inputs_dir(day) / 'problem.html'
+    problem_file = aoc.inputs_dir(day) / "problem.html"
     if not problem_file.is_file():
         response = requests.get(problem_url)
         if not response.status_code == 200:
-            print(f"Failed to get problem statement ({response.status_code}):", 
-                response.text)
+            print(
+                f"Failed to get problem statement ({response.status_code}):",
+                response.text,
+            )
         else:
-            with open(problem_file, 'w', encoding=response.encoding) as fh:
+            with open(problem_file, "w", encoding=response.encoding) as fh:
                 fh.write(response.text)
 
-    with open(problem_file, 'r') as fh:
+    with open(problem_file, "r") as fh:
         soup = bs4.BeautifulSoup(fh, features="html.parser")
 
-    if len(soup.main.find_all('pre')) == 1:
-        with open(code_dir / 'test.txt', 'w') as fh:
+    if len(soup.main.find_all("pre")) == 1:
+        with open(code_dir / "test.txt", "w") as fh:
             fh.write(soup.main.pre.text)
     else:
-        for i, block in enumerate(soup.main.find_all('pre')):
-            with open(code_dir / f'test_{i}.txt', 'w', encoding='utf8') as fh:
+        for i, block in enumerate(soup.main.find_all("pre")):
+            with open(code_dir / f"test_{i}.txt", "w", encoding="utf8") as fh:
                 fh.write(block.text)
+
 
 if __name__ == "__main__":
     assert datetime.datetime.now().month == 12, "Advent is in December"
     assert datetime.datetime.now().day <= 25
 
-    root = path.Path(os.environ['AOC_ROOT'])
+    root = path.Path(os.environ["AOC_ROOT"])
 
     path.Path.mkdir(aoc.inputs_dir(), parents=True, exist_ok=True)
     aoc.download_input()

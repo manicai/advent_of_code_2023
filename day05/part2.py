@@ -13,14 +13,13 @@ to_ints = aoc.to_ints
 
 def read_seed_ranges(input):
     for line in input:
-        if line.startswith('seeds: '):
+        if line.startswith("seeds: "):
             break
 
-    values = to_ints(line[len('seeds: '):].split())
+    values = to_ints(line[len("seeds: ") :].split())
     assert len(values) % 2 == 0
-    return [(values[2 * i], values[2 * i + 1])
-             for i in range(len(values) // 2)]
-        
+    return [(values[2 * i], values[2 * i + 1]) for i in range(len(values) // 2)]
+
 
 def read_maps(input):
     current_map_name = None
@@ -60,22 +59,23 @@ def combine_maps(in_map, out_map):
     breakpoints = find_breakpoints(out_map.ranges)
     result_map = LazyMap()
     for rg in in_map.ranges:
-        #print("Range:", rg) 
-        breaks = set(bp for bp, _ in breakpoints
-                     if bp >= rg.value_start 
-                     and bp < rg.value_start + rg.length)
-        breaks.update({rg.value_start, 
-                       rg.value_start + rg.length})
+        # print("Range:", rg)
+        breaks = set(
+            bp
+            for bp, _ in breakpoints
+            if bp >= rg.value_start and bp < rg.value_start + rg.length
+        )
+        breaks.update({rg.value_start, rg.value_start + rg.length})
         breaks = sorted(breaks)
-        #print("Breakpoints:", breaks)
+        # print("Breakpoints:", breaks)
         for start, end in list(zip(breaks[:-1], breaks[1:])):
             target_offset = start - rg.value_start
             key_start = rg.key_start + target_offset
             length = end - start
             out_value = out_map.value_for(start)
-            #print(out_value)
+            # print(out_value)
             new = LazyMapRange(key_start, out_value, length)
-            #print(new)
+            # print(new)
             result_map.add_range(new)
 
     return result_map
@@ -100,9 +100,11 @@ def part2(input):
     print("Minimum location:", min_loc)
     return min_loc
 
+
 def test():
     pass
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     pass
     aoc.run_script(part2)
