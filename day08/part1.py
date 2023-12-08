@@ -6,7 +6,7 @@ import math
 import re
 
 
-PATTERN = r"([0-9A-Z]+) = \(([0-9A-Z]+), ([0-9A-Z]+)\)"
+PATTERN = r"(\w+) = \((\w+), (\w+)\)"
 
 
 def read_graph(input):

@@ -10,6 +10,7 @@ standard_imports = """
 import functools
 import itertools
 import math
+import numpy
 import re
 """
 

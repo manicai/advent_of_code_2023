@@ -4,34 +4,8 @@ import part1
 import functools
 import itertools
 import math
+import numpy
 import re
-
-
-def finished(locations):
-    for current in locations.values():
-        if current[-1] != "Z":
-            return False
-    return True
-
-
-def find_factors(number):
-    for n in range(2, number):
-        if number % n == 0:
-            return [n] + find_factors(number // n)
-    return [number]
-
-
-def lowest_common_multiple(numbers):
-    print(numbers)
-    factors = [find_factors(n) for n in numbers]
-    print(factors)
-    union = set(n for s in factors for n in s)
-    lcm = 1
-    for n in union:
-        count = max(s.count(n) for s in factors)
-        assert count >= 1
-        lcm *= n**count
-    return lcm
 
 
 def part2(input):
@@ -51,7 +25,7 @@ def part2(input):
             count += 1
         counts[location] = count
     print(counts)
-    print(lowest_common_multiple(counts.values()))
+    print(numpy.lcm.reduce(list(counts.values())))
 
 
 if __name__ == "__main__":
