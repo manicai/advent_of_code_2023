@@ -1,3 +1,4 @@
+import datetime
 import os
 import pathlib as path
 
@@ -74,6 +75,9 @@ def download_tests(day=aoc.today(), year=aoc.year()):
                 fh.write(block.text)
 
 if __name__ == "__main__":
+    assert datetime.datetime.now().month == 12, "Advent is in December"
+    assert datetime.datetime.now().day <= 25
+
     root = path.Path(os.environ['AOC_ROOT'])
 
     path.Path.mkdir(aoc.inputs_dir(), parents=True, exist_ok=True)
