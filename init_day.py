@@ -52,7 +52,7 @@ code_dir = path.Path(f"day{aoc.today():02}")
                                 
 def download_tests(day=aoc.today(), year=aoc.year()):
     problem_url = f"https://adventofcode.com/{year}/day/{day}"
-    problem_file = aoc.inputs_dir() / 'problem.html'
+    problem_file = aoc.inputs_dir(day) / 'problem.html'
     if not problem_file.is_file():
         response = requests.get(problem_url)
         if not response.status_code == 200:
@@ -64,7 +64,6 @@ def download_tests(day=aoc.today(), year=aoc.year()):
 
     with open(problem_file, 'r') as fh:
         soup = bs4.BeautifulSoup(fh, features="html.parser")
-
 
     if len(soup.main.find_all('pre')) == 1:
         with open(code_dir / 'test.txt', 'w') as fh:
