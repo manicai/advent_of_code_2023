@@ -23,7 +23,6 @@ def part1(input):
 
 
 if __name__ == "__main__":
-    test()
     aoc.run_script(part1)
 """
 
@@ -36,7 +35,6 @@ def part2(input):
 
 
 if __name__ == "__main__":
-    test()
     aoc.run_script(part2)
 """
 
@@ -71,14 +69,14 @@ def download_tests(day=aoc.today(), year=aoc.year()):
             fh.write(soup.main.pre.text)
     else:
         for i, block in enumerate(soup.main.find_all('pre')):
-            with open(code_dir / f'test.txt_{i}', 'w', encoding='utf8') as fh:
+            with open(code_dir / f'test_{i}.txt', 'w', encoding='utf8') as fh:
                 fh.write(block.text)
 
 if __name__ == "__main__":
     root = path.Path(os.environ['AOC_ROOT'])
 
     path.Path.mkdir(aoc.inputs_dir(), parents=True, exist_ok=True)
-    # aoc.download_input()
+    aoc.download_input()
 
     path.Path.mkdir(code_dir, exist_ok=True)
     download_tests()
