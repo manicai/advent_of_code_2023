@@ -32,10 +32,10 @@ def today():
 
 
 def inputs_dir(day=today()):
-    root = path.Path(os.environ['AOC_ROOT'])
+    root = path.Path(os.environ["AOC_ROOT"])
     return root / f"inputs/day_{day:02}"
 
-                                
+
 def cached_input():
     return inputs_dir() / "input.txt"
 
@@ -43,7 +43,11 @@ def cached_input():
 def run_script(func):
     test_mode = "-t" in sys.argv
     if test_mode:
-        input_file = "test.txt"
+        # Look for plausible test file names.
+        for candidate in ["test.txt", "test_0.txt", "test_1.txt"]:
+            input_file = path.Path(candidate)
+            if input_file.is_file():
+                break
     elif len(sys.argv) > 1:
         input_file = sys.argv[1]
     else:
@@ -59,3 +63,18 @@ def run_script(func):
 
 def to_ints(lst):
     return [int(n) for n in lst]
+
+
+def circular(lst):
+    class CircularView:
+        def __init__(self):
+            self._len = len(lst)
+            assert self._len != 0
+
+        def __getitem__(self, key):
+            return lst[key % self._len]
+
+        def __len__(self):
+            return self._len
+
+    return CircularView()

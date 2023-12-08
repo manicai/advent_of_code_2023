@@ -24,17 +24,15 @@ def read_graph(input):
 
 
 def part1(input):
-    steps = input[0]
+    steps = aoc.circular(input[0])
     location = "AAA"
     count = 0
-    offset = 0
     graph = read_graph(input)
     while location != "ZZZ":
-        direction = steps[offset]
+        direction = steps[count]
         location = graph[location][direction]
-        offset = (offset + 1) % len(steps)
         count += 1
-        print(count, location)
+        # print(count, location)
     print(count)
 
 

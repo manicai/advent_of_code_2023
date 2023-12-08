@@ -10,7 +10,7 @@ import re
 
 def part2(input):
     graph = part1.read_graph(input)
-    steps = input[0]
+    steps = aoc.circular(input[0])
 
     locations = dict((k, k) for k in graph if k[-1] == "A")
     # print(locations)
@@ -19,7 +19,7 @@ def part2(input):
         count = 0
         current = location
         while current[-1] != "Z":
-            direction = steps[count % len(steps)]
+            direction = steps[count]
             current = graph[current][direction]
             # print(count, locations)
             count += 1
