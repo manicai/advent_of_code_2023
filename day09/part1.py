@@ -6,10 +6,11 @@ import math
 import numpy
 import re
 
+
 def extrapolate(seq) -> int:
     if not any(seq):
         return 0
-    return seq[-1] + extrapolate(list(y-x for x,y in itertools.pairwise(seq)))
+    return seq[-1] + extrapolate(list(y - x for x, y in itertools.pairwise(seq)))
 
 
 def part1(input):
