@@ -58,7 +58,7 @@ def run_script(func):
     with open(input_file, "r", encoding="ascii") as fh:
         lines = [l.strip() for l in fh.readlines()]
 
-    func(lines)
+    return func(lines)
 
 
 def to_ints(lst):
