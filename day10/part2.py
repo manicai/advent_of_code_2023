@@ -85,10 +85,12 @@ def shrink_map(expanded):
 
 def paint(grid):
     mutable = [list(row) for row in grid]
-    indices = [(0,0),
-                (0, len(grid) - 1),
-                (len(grid) - 1, 0), 
-            (len(grid) - 1, len(grid) - 1)]
+    indices = [
+        (0, 0),
+        (0, len(grid) - 1),
+        (len(grid) - 1, 0),
+        (len(grid) - 1, len(grid) - 1),
+    ]
     while len(indices) > 0:
         row, col = indices.pop()
         assert mutable[row][col] in ".*"
@@ -102,8 +104,8 @@ def paint(grid):
                         indices.append((r, c))
                 except IndexError:
                     pass  # Off the edge
-            #print_map(["".join(r) for r in mutable])
-            #print()
+            # print_map(["".join(r) for r in mutable])
+            # print()
     return ["".join(r) for r in mutable]
 
 
@@ -117,6 +119,7 @@ def part2(input):
     print_map(shrink_map(colour))
     count = sum(r.count(".") for r in shrink_map(colour))
     return count
+
 
 if __name__ == "__main__":
     result = aoc.run_script(part2)
