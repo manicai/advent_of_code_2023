@@ -22,12 +22,13 @@ templates[
 ] = f"""import aoc
 {standard_imports}
 
-def part1(input):
+def part1(input: list[str]) -> int:
     pass
 
 
 if __name__ == "__main__":
-    aoc.run_script(part1)
+    result = aoc.run_script(part1)
+    print(f"Part 1: {{result}}")
 """
 
 templates[
@@ -36,12 +37,13 @@ templates[
 import part1
 {standard_imports}
 
-def part2(input):
+def part2(input: list[str]) -> int:
     pass
 
 
 if __name__ == "__main__":
-    aoc.run_script(part2)
+    result = aoc.run_script(part1)
+    print(f"Part 2: {{result}}")
 """
 
 test_template = """from {} import *
