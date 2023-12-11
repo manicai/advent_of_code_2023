@@ -14,7 +14,7 @@ def super_expand_universe(input):
     for row in input:
         galaxies = find_all(row, "#")
         if not galaxies:
-            expand_rows.append('+' * len(row))
+            expand_rows.append("+" * len(row))
         else:
             galaxy_cols.update(galaxies)
             expand_rows.append(row)

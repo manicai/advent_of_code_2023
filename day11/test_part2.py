@@ -13,7 +13,8 @@ expanded = [
     "++++++++++",
     "..+..+.#+.",
     "#.+.#+..+.",
-    ]
+]
+
 
 def test_super_expand():
     result = super_expand_universe(universe)
@@ -31,6 +32,7 @@ def test_super_expand():
 # ..+..+.7+.
 # 8.+.9+..+.
 
+
 def test_measure_distance():
     assert measure_distance((0, 0), (1, 1), expanded, 1) == 2
     assert measure_distance((0, 0), (1, 1), expanded, 100) == 2
@@ -41,9 +43,53 @@ def test_measure_distance():
     assert measure_distance((0, 0), (0, 4), expanded, 10) == 13
 
     # Crossing one expanded row: ..2+.
-    assert measure_distance((0, 0,), (4, 0), expanded, 1) == 4
-    assert measure_distance((0, 0,), (4, 0), expanded, 10) == 13
-    assert measure_distance((0, 0,), (4, 0), expanded, 1000) == 1003
+    assert (
+        measure_distance(
+            (
+                0,
+                0,
+            ),
+            (4, 0),
+            expanded,
+            1,
+        )
+        == 4
+    )
+    assert (
+        measure_distance(
+            (
+                0,
+                0,
+            ),
+            (4, 0),
+            expanded,
+            10,
+        )
+        == 13
+    )
+    assert (
+        measure_distance(
+            (
+                0,
+                0,
+            ),
+            (4, 0),
+            expanded,
+            1000,
+        )
+        == 1003
+    )
 
     # Symmetric
-    assert measure_distance((4, 0,), (0, 0), expanded, 1000) == 1003
+    assert (
+        measure_distance(
+            (
+                4,
+                0,
+            ),
+            (0, 0),
+            expanded,
+            1000,
+        )
+        == 1003
+    )
