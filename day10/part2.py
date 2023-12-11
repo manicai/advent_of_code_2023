@@ -1,5 +1,5 @@
 import aoc
-from part1 import *
+from .part1 import *
 
 import functools
 import itertools

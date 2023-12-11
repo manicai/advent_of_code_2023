@@ -15,7 +15,7 @@ import numpy
 import re
 """
 
-templates = {}
+templates = {"__init__": ""}
 
 templates[
     "part1"
@@ -34,7 +34,7 @@ if __name__ == "__main__":
 templates[
     "part2"
 ] = f"""import aoc
-import part1
+from . import part1
 {standard_imports}
 
 def part2(input: list[str]) -> int:
@@ -46,7 +46,7 @@ if __name__ == "__main__":
     print(f"Part 2: {{result}}")
 """
 
-test_template = """from {} import *
+test_template = """from .{} import *
 import pytest
 
 
@@ -102,7 +102,7 @@ if __name__ == "__main__":
         else:
             print(f"Template {code_file} already exists")
 
-        test_file = code_dir / f"test_{part}.py"
+        test_file = code_dir / f"test_day{aoc.today():02}_{part}.py"
         if not test_file.is_file():
             with open(test_file, "w") as fh:
                 fh.write(test_template.format(part))

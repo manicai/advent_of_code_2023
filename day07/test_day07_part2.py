@@ -1,4 +1,4 @@
-from part2 import *
+from .part2 import *
 
 
 def test_part2():

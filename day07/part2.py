@@ -1,5 +1,5 @@
 import aoc
-import part1
+from . import part1
 
 import collections
 import functools

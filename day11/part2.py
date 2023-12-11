@@ -1,5 +1,5 @@
 import aoc
-from part1 import find_all, find_galaxies
+from .part1 import find_all, find_galaxies
 
 import functools
 import itertools
