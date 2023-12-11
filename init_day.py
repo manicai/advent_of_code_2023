@@ -102,7 +102,7 @@ if __name__ == "__main__":
         else:
             print(f"Template {code_file} already exists")
 
-        test_file = code_dir / f"test_day{aoc.today():02}_{part}.py"
+        test_file = code_dir / f"test_{part}.py"
         if not test_file.is_file():
             with open(test_file, "w") as fh:
                 fh.write(test_template.format(part))

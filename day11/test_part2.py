@@ -1,6 +1,6 @@
 from .part2 import *
 import pytest
-from day11.test_day11_part1 import universe
+from day11.test_part1 import universe
 
 expanded = [
     "..+#.+..+.",

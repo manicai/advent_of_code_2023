@@ -1,7 +1,7 @@
 from .part2 import *
 import pytest
 
-from day10.test_day10_part1 import simple, example
+from day10.test_part1 import simple, example
 
 
 example_dirty = [
