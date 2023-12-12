@@ -42,7 +42,7 @@ def part2(input: list[str]) -> int:
 
 
 if __name__ == "__main__":
-    result = aoc.run_script(part1)
+    result = aoc.run_script(part2)
     print(f"Part 2: {{result}}")
 """
 
@@ -102,9 +102,10 @@ if __name__ == "__main__":
         else:
             print(f"Template {code_file} already exists")
 
-        test_file = code_dir / f"test_{part}.py"
-        if not test_file.is_file():
-            with open(test_file, "w") as fh:
-                fh.write(test_template.format(part))
-        else:
-            print(f"Test template {test_file} already exists")
+        if templates[part]:
+            test_file = code_dir / f"test_{part}.py"
+            if not test_file.is_file():
+                with open(test_file, "w") as fh:
+                    fh.write(test_template.format(part))
+            else:
+                print(f"Test template {test_file} already exists")
