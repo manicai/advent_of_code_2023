@@ -34,7 +34,12 @@ if __name__ == "__main__":
 templates[
     "part2"
 ] = f"""import aoc
-from . import part1
+# Horrid hack because I can't be bothered to think about paths and
+# packages for this.
+try:
+    from . import part1
+except ImportError:
+    import part1
 {standard_imports}
 
 def part2(input: list[str]) -> int:
