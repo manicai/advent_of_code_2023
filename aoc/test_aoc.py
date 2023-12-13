@@ -17,3 +17,8 @@ def test_circular():
     for a, b in zip(l, circular(l)):
         assert a == b
     assert len(l) == len(c)
+
+
+def test_transpose():
+    block = ["123", "456", "789"]
+    assert transpose(block) == ["147", "258", "369"]

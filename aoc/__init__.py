@@ -65,6 +65,10 @@ def to_ints(lst):
     return [int(n) for n in lst]
 
 
+def transpose(block: list[str]) -> list[str]:
+    return ["".join(row[i] for row in block) for i in range(len(block[0]))]
+
+
 def circular(lst):
     class CircularView:
         def __init__(self):
