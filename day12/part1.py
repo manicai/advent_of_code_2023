@@ -9,7 +9,11 @@ import re
 
 def parse_line(line: str) -> tuple[str, list[int]]:
     match = re.match(r"([?.#]+) ([0-9,]+)", line)
-    return match.group(1), [int(x) for x in match.group(2).split(",")]
+    try:
+        return match.group(1), [int(x) for x in match.group(2).split(",")]
+    except AttributeError:
+        print(f"Failed to parse {line}")
+        raise
 
 
 def count_missing(coils: str, pattern: list[int]) -> int:
