@@ -1,11 +1,6 @@
 import aoc
 
-# Horrid hack because I can't be bothered to think about paths and
-# packages for this.
-try:
-    from . import part1
-except ImportError:
-    import part1
+from day14.part1 import roll_north, roll_row_west, roll_west
 
 import functools
 import itertools
