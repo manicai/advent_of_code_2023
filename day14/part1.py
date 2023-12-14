@@ -44,12 +44,13 @@ def print_grid(grid: list[str]):
         print(row)
 
 
+def score(grid):
+    return sum((len(grid) - i) * row.count("O") for i, row in enumerate(grid))
+
+
 def part1(input: list[str]) -> int:
     grid = roll_north(input)
-
-    s = sum((len(grid) - i) * row.count("O") for i, row in enumerate(grid))
-
-    return s
+    return score(grid)
 
 
 if __name__ == "__main__":
