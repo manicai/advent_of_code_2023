@@ -56,7 +56,7 @@ def run_script(func, day=today()):
 
     print(f"Reading from {input_file}")
     with open(input_file, "r", encoding="ascii") as fh:
-        lines = [l.strip() for l in fh.readlines()]
+        lines = [line.strip() for line in fh.readlines()]
 
     return func(lines)
 

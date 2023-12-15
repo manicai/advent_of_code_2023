@@ -1,0 +1,6 @@
+[flake8]
+max-line-length = 120
+extend_ignore = F401, E203, E704
+per-file-ignores =
+    test_part1.py: F403, F405
+    test_part2.py: F403, F405

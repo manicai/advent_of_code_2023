@@ -1,4 +1,4 @@
-from .part2 import *
+from day15.part2 import *
 import pytest
 
 

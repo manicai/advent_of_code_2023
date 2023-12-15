@@ -64,8 +64,6 @@ def find_matches(coils: str, pattern: list[int], depth=1) -> list[int]:
 
 
 def count_possible_matches(coils: str, pattern: list[int]) -> int:
-    missing = count_missing(coils, pattern)
-    possible = coils.count("?")
     count = len(list(find_matches(coils, pattern)))
     return count
 
