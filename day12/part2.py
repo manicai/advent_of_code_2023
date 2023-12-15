@@ -1,5 +1,3 @@
-import aoc
-
 import functools
 import itertools
 import math
@@ -7,14 +5,9 @@ import numpy
 import re
 import time
 
+import aoc
+from day12.part1 import parse_line
 
-def parse_line(line: str) -> tuple[str, list[int]]:
-    match = re.match(r"([?.#]+) ([0-9,]+)", line)
-    try:
-        return match.group(1), [int(x) for x in match.group(2).split(",")]
-    except AttributeError:
-        print(f"Failed to parse {line}")
-        raise
 
 
 @functools.cache
