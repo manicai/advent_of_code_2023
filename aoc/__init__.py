@@ -6,14 +6,22 @@ import sys
 import requests
 
 
-def download_input():
+def year():
+    return datetime.datetime.now().year
+
+
+def today():
+    return datetime.datetime.now().day
+
+
+def download_input(day=today(), year=year()):
     if os.path.exists(cached_input()):
         print("Input data already cached, no download required")
         return
 
     session_cookie = os.environ["AOC_COOKIE"]
     cookies = {"session": session_cookie}
-    url = f"https://adventofcode.com/{year()}/day/{today()}/input"
+    url = f"https://adventofcode.com/{year}/day/{today}/input"
     print("Fetching data from", url)
     response = requests.get(url, cookies=cookies)
     assert (
@@ -23,24 +31,16 @@ def download_input():
         fh.write(response.text)
 
 
-def year():
-    return datetime.datetime.now().year
-
-
-def today():
-    return datetime.datetime.now().day
-
-
 def inputs_dir(day=today()):
     root = path.Path(os.environ["AOC_ROOT"])
     return root / f"inputs/day_{day:02}"
 
 
-def cached_input():
-    return inputs_dir() / "input.txt"
+def cached_input(day=today()):
+    return inputs_dir(day) / "input.txt"
 
 
-def run_script(func):
+def run_script(func, day=today()):
     test_mode = "-t" in sys.argv
     if test_mode:
         # Look for plausible test file names.
@@ -51,8 +51,8 @@ def run_script(func):
     elif len(sys.argv) > 1:
         input_file = sys.argv[1]
     else:
-        download_input()
-        input_file = cached_input()
+        download_input(day)
+        input_file = cached_input(day)
 
     print(f"Reading from {input_file}")
     with open(input_file, "r", encoding="ascii") as fh:

@@ -11,44 +11,51 @@ standard_imports = """
 import functools
 import itertools
 import math
-import numpy
 import re
+import numpy
 """
 
 templates = {"__init__": ""}
 
 templates[
     "part1"
-] = f"""import aoc
+] = f"""#!/usr/bin/env python3
+\"\"\"Advent of Code {aoc.year()} Day {aoc.today()} Part 1\"\"\"
 {standard_imports}
+
+import aoc
+
 
 def part1(input: list[str]) -> int:
     pass
 
 
 if __name__ == "__main__":
-    result = aoc.run_script(part1)
+    result = aoc.run_script(part1, day={aoc.today()})
     print(f"Part 1: {{result}}")
 """
 
 templates[
     "part2"
-] = f"""import aoc
-import day{aoc.today()}.part1 as part1
+] = f"""#!/usr/bin/env python3
+\"\"\"Advent of Code {aoc.year()} Day {aoc.today()} Part 2\"\"\"
 {standard_imports}
+
+import aoc
+import day{aoc.today()}.part1 as part1
+
 
 def part2(input: list[str]) -> int:
     pass
 
 
 if __name__ == "__main__":
-    result = aoc.run_script(part2)
+    result = aoc.run_script(part2, day={aoc.today()})
     print(f"Part 2: {{result}}")
 """
 
-test_template = """from .{} import *
-import pytest
-
+test_template = f"""import pytest
+from day{aoc.today()}.{{}} import *
 
 def test():
     pass
