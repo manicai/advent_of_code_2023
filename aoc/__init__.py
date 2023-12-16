@@ -21,7 +21,7 @@ def download_input(day=today(), year=year()):
 
     session_cookie = os.environ["AOC_COOKIE"]
     cookies = {"session": session_cookie}
-    url = f"https://adventofcode.com/{year}/day/{today}/input"
+    url = f"https://adventofcode.com/{year}/day/{day}/input"
     print("Fetching data from", url)
     response = requests.get(url, cookies=cookies)
     assert (

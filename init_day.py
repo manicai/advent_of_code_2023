@@ -57,6 +57,7 @@ if __name__ == "__main__":
 test_template = f"""import pytest
 from day{aoc.today()}.{{}} import *
 
+
 def test():
     pass
 """
