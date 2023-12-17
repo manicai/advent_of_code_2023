@@ -26,7 +26,7 @@ templates[
 import aoc
 
 
-def part1(input: list[str]) -> int:
+def part1(data: list[str]) -> int:
     pass
 
 
@@ -45,7 +45,7 @@ import aoc
 import day{aoc.today()}.part1 as part1
 
 
-def part2(input: list[str]) -> int:
+def part2(data: list[str]) -> int:
     pass
 
 
