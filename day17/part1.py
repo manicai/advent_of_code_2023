@@ -18,12 +18,18 @@ WEST = (0, -1)
 DIRECTIONS = [NORTH, SOUTH, EAST, WEST]
 
 
+def is_opposite(a, b):
+    return a[0] == -b[0] and a[1] == -b[1]
+
+
 # Node = (row, column, entry_direction, straight_length)
 def find_neighbours(node, grid):
     row, column, entry_direction, straight = node
     for exit_direction in DIRECTIONS:
         if straight == 3 and exit_direction == entry_direction:
             continue  # Can't have a straight of length 4
+        if is_opposite(exit_direction, entry_direction):
+            continue  # Can't go back the way we came
         d_row, d_col = exit_direction
         new_row = row + d_row
         new_col = column + d_col
@@ -77,7 +83,10 @@ def part1(puzzle: list[str]) -> int:
     travel_map = build_map(puzzle)
     distances = dijkstra(travel_map, costs, (0, 0, (0, 0), 0))
     target = (len(puzzle) - 1, len(puzzle[0]) - 1)
-    return min(v for (r, c, _, _), v in distances.items() if (r, c) == target)
+    # for k, d in distances.items():
+    #     if (k[0], k[1]) == target:
+    #         print(k, d)
+    return min(d for (r, c, _, _), d in distances.items() if (r, c) == target)
 
 
 if __name__ == "__main__":
