@@ -74,17 +74,10 @@ def dijkstra(graph, costs, start):
 
 def part1(puzzle: list[str]) -> int:
     costs = [[int(c) for c in row] for row in puzzle]
-    m = build_map(puzzle)
-    print(len(puzzle), len(puzzle[0]), "->", len(puzzle) * len(puzzle[0]))
-    print(len(m))
-    print(m[(4, 5, (1, 0), 3)])
-    print(costs[4][5])
-    target = len(puzzle) - 1, len(puzzle[0]) - 1
-    distances = dijkstra(m, costs, (0, 0, (0, 0), 0))
-    for k, v in distances.items():
-        r, c, _, _ = k
-        if (r, c) == target:
-            print(k, v)
+    travel_map = build_map(puzzle)
+    distances = dijkstra(travel_map, costs, (0, 0, (0, 0), 0))
+    target = (len(puzzle) - 1, len(puzzle[0]) - 1)
+    return min(v for (r, c, _, _), v in distances.items() if (r, c) == target)
 
 
 if __name__ == "__main__":
