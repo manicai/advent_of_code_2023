@@ -12,7 +12,7 @@ import aoc
 import day17.part1 as part1
 
 
-def part2(input: list[str]) -> int:
+def part2(puzzle: list[str]) -> int:
     pass
 
 
