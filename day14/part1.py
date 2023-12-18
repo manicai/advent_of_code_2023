@@ -1,4 +1,5 @@
 import aoc
+import aoc.lib
 
 import functools
 import itertools
@@ -36,7 +37,7 @@ def roll_west(grid: list[str]) -> list[str]:
 
 
 def roll_north(grid: list[str]) -> list[str]:
-    return aoc.transpose(roll_west(aoc.transpose(grid)))
+    return aoc.lib.transpose(roll_west(aoc.lib.transpose(grid)))
 
 
 def print_grid(grid: list[str]):
@@ -54,5 +55,5 @@ def part1(input: list[str]) -> int:
 
 
 if __name__ == "__main__":
-    result = aoc.run_script(part1)
+    result = aoc.run_script(part1, day=14)
     print(f"Part 1: {result}")

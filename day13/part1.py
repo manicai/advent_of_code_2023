@@ -1,4 +1,5 @@
 import aoc
+import aoc.lib
 
 import functools
 import itertools
@@ -51,7 +52,7 @@ def find_vertical_symmetry(block: list[str]) -> int:
 
 
 def find_horizontal_symmetry(block: list[str]) -> int:
-    t = aoc.transpose(block)
+    t = aoc.lib.transpose(block)
     return find_vertical_symmetry(t)
 
 
@@ -72,7 +73,7 @@ def part1(input: list[str]) -> int:
         vsym = find_vertical_symmetry(block)
         assert len(hsym) < 2, f"Multiple horizontal symmetries {hsym}"
         assert len(vsym) < 2, f"Multiple vertical symmetries {vsym}"
-        print(hsym, vsym)
+        # print(hsym, vsym)
         value = sum((h + 1) for h in hsym) + sum(100 * (v + 1) for v in vsym)
         total += value
 
@@ -80,5 +81,5 @@ def part1(input: list[str]) -> int:
 
 
 if __name__ == "__main__":
-    result = aoc.run_script(part1)
+    result = aoc.run_script(part1, day=13)
     print(f"Part 1: {result}")

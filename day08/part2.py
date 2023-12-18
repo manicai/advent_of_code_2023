@@ -1,5 +1,5 @@
-import aoc
-from . import part1
+import aoc.lib
+from day08 import part1
 
 import functools
 import itertools
@@ -10,7 +10,7 @@ import re
 
 def part2(input):
     graph = part1.read_graph(input)
-    steps = aoc.circular(input[0])
+    steps = aoc.lib.circular(input[0])
 
     locations = dict((k, k) for k in graph if k[-1] == "A")
     # print(locations)
@@ -29,4 +29,4 @@ def part2(input):
 
 
 if __name__ == "__main__":
-    aoc.run_script(part2)
+    aoc.run_script(part2, day=8)
