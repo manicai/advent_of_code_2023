@@ -20,7 +20,7 @@ example = [
 
 
 def test_find_bounds():
-    bounds = find_bounds(example)
+    bounds = find_bounds(example, parse_line)
     assert bounds.east_west == (0, 6)
     assert bounds.south_north == (0, 9)
 

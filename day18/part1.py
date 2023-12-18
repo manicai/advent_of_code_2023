@@ -32,12 +32,17 @@ class Bounds:
         return str(self)
 
 
-def find_bounds(data: list[str]) -> Bounds:
+def parse_line(line: str) -> tuple[str, int]:
+    direction, size, _ = line.split()
+    size = int(size)
+    return direction, size
+
+
+def find_bounds(data: list[str], parser) -> Bounds:
     location = 0, 0
     bounds = Bounds()
     for step in data:
-        direction, size, _ = step.split()
-        size = int(size)
+        direction, size = parser(step)
         if direction == "D":
             location = location[0], location[1] + size
         elif direction == "U":
@@ -77,10 +82,10 @@ def print_grid(grid: list[list[str]], location=(None, None)):
 
 
 def trace_route(
-    grid: list[list[str]], location: tuple[int, int], route_data: list[str]
+    grid: list[list[str]], location: tuple[int, int], route_data: list[str], parser
 ):
     for step in route_data:
-        direction, size, _ = step.split()
+        direction, size = parser(step)
         size = int(size)
         for _ in range(size):
             location = move(location, direction, 1)
@@ -102,17 +107,19 @@ def shade_grid(grid: list[list[str]]):
 
 
 def part1(data: list[str]) -> int:
-    bounds = find_bounds(data)
-
+    bounds = find_bounds(data, parse_line)
+    print(f"Established bounds : {bounds}.", flush=True)
     grid = [
         ["." for _ in range(bounds.east_west[1] - bounds.east_west[0] + 1)]
         for _ in range(bounds.south_north[1] - bounds.south_north[0] + 1)
     ]
     location = abs(bounds.south_north[0]), abs(bounds.east_west[0])
-    # print_grid(grid, location)
-    grid = trace_route(grid, location, data)
-    grid = shade_grid(grid)
+    print("Built grid.", flush=True)
+    grid = trace_route(grid, location, data, parse_line)
     # print_grid(grid)
+    print("Traced route.", flush=True)
+    grid = shade_grid(grid)
+    print("Shaded grid.", flush=True)
     return sum(row.count("#") for row in grid)
 
 
