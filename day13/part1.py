@@ -1,5 +1,5 @@
 import aoc
-import aoc.lib
+import aoc.util
 
 import functools
 import itertools
@@ -52,7 +52,7 @@ def find_vertical_symmetry(block: list[str]) -> int:
 
 
 def find_horizontal_symmetry(block: list[str]) -> int:
-    t = aoc.lib.transpose(block)
+    t = aoc.util.transpose(block)
     return find_vertical_symmetry(t)
 
 

@@ -1,4 +1,4 @@
-import aoc.lib
+import aoc.util
 from day08 import part1
 
 import functools
@@ -10,7 +10,7 @@ import re
 
 def part2(input):
     graph = part1.read_graph(input)
-    steps = aoc.lib.circular(input[0])
+    steps = aoc.util.circular(input[0])
 
     locations = dict((k, k) for k in graph if k[-1] == "A")
     # print(locations)

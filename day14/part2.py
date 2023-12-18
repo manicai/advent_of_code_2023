@@ -1,5 +1,5 @@
 import aoc
-import aoc.lib
+import aoc.util
 
 from day14.part1 import roll_north, roll_row_west, roll_west, print_grid, score
 
@@ -20,7 +20,7 @@ def roll_east(grid: list[str]) -> list[str]:
 
 
 def roll_south(grid: list[str]) -> list[str]:
-    return aoc.lib.transpose(roll_east(aoc.lib.transpose(grid)))
+    return aoc.util.transpose(roll_east(aoc.util.transpose(grid)))
 
 
 def cycle(grid: list[str]) -> list[str]:

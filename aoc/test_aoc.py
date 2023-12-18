@@ -1,5 +1,5 @@
 import pytest
-from aoc.lib import *
+from aoc.util import *
 
 
 def test_to_ints():
