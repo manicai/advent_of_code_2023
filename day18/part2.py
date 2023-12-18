@@ -66,8 +66,10 @@ def part2(data: list[str]) -> int:
     # we will so far only have counted a quarter of the turn block but for
     # left turns we will have counted three quarters. Straights are a half,
     # fairly obviously. Since it is a closed loop the of right and left turns
-    # cancels out so we can just add half the length. Then need to add one
-    # more for the starting block.
+    # almost cancels out so we can just add half the length. The "almost" is
+    # that there are four right turns to make the loop that have no
+    # corresponding left turn so we need to add an extra 1 for (quarter each)
+    # for those.
     area += length / 2 + 1
     assert area == int(area), f"Area {area} is not an integer"
     return int(area)
