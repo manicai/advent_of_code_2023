@@ -23,3 +23,25 @@ def test_find_bounds():
     bounds = find_bounds(example)
     assert bounds.east_west == (0, 6)
     assert bounds.south_north == (0, 9)
+
+
+def test_shade_grid():
+    input_grid = [
+        list("###..###..###"),
+        list("#.#..#.#..#.#"),
+        list("#.####.####.#"),
+        list("#...........#"),
+        list("#...#####...#"),
+        list("#####...#####"),
+    ]
+    expected_grid = [
+        list("###..###..###"),
+        list("###..###..###"),
+        list("#############"),
+        list("#############"),
+        list("#############"),
+        list("#####...#####"),
+    ]
+    actual = shade_grid(input_grid)
+    # print_grid(actual)
+    assert actual == expected_grid

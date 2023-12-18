@@ -61,6 +61,11 @@ directions = {
 }
 
 
+def move(location: tuple[int, int], direction: str, size: int) -> tuple[int, int]:
+    vector = directions[direction]
+    return location[0] + size * vector[0], location[1] + size * vector[1]
+
+
 def print_grid(grid: list[list[str]], location=(None, None)):
     for i, row in enumerate(grid):
         for j, cell in enumerate(row):
@@ -71,6 +76,31 @@ def print_grid(grid: list[list[str]], location=(None, None)):
         print()
 
 
+def trace_route(
+    grid: list[list[str]], location: tuple[int, int], route_data: list[str]
+):
+    for step in route_data:
+        direction, size, _ = step.split()
+        size = int(size)
+        for _ in range(size):
+            location = move(location, direction, 1)
+            grid[location[0]][location[1]] = "#"
+    return grid
+
+
+def shade_grid(grid: list[list[str]]):
+    for row_index, row in enumerate(grid[:-1]):
+        in_enclosed_area = False
+        for column_index, cell in enumerate(row):
+            if cell == "#":
+                if grid[row_index + 1][column_index] == "#":
+                    in_enclosed_area = not in_enclosed_area
+            else:
+                if in_enclosed_area:
+                    row[column_index] = "#"
+    return grid
+
+
 def part1(data: list[str]) -> int:
     bounds = find_bounds(data)
 
@@ -78,8 +108,12 @@ def part1(data: list[str]) -> int:
         ["." for _ in range(bounds.east_west[1] - bounds.east_west[0] + 1)]
         for _ in range(bounds.south_north[1] - bounds.south_north[0] + 1)
     ]
-    start_location = abs(bounds.south_north[0]), abs(bounds.east_west[0])
-    print_grid(grid, start_location)
+    location = abs(bounds.south_north[0]), abs(bounds.east_west[0])
+    # print_grid(grid, location)
+    grid = trace_route(grid, location, data)
+    grid = shade_grid(grid)
+    # print_grid(grid)
+    return sum(row.count("#") for row in grid)
 
 
 if __name__ == "__main__":
