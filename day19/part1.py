@@ -11,15 +11,16 @@ import numpy
 
 import aoc
 
+operators = {
+    "<": operator.lt,
+    ">": operator.gt,
+}
+
 
 def parse_rule(rule: str):
     if m := re.match(r"([xmas])([<>])(\d+):(\w+)", rule):
         selector = m.group(1)
-        if m.group(2) == "<":
-            op = operator.lt
-        else:
-            assert m.group(2) == ">"
-            op = operator.gt
+        op = operators[m.group(2)]
         value = int(m.group(3))
         action = m.group(4)
         return (selector, op, value, action)
