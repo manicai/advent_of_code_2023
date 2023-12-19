@@ -24,7 +24,7 @@ def test_apply_rule_simple():
 
 def test_apply_rule_simple():
     parts = {"x": (1, 10), "m": (1, 10)}
-    rule = [("x", "<", 6, "fg"), ("m", ">", 8, "rt")]
+    rule = [("x", "<", 6, "fg"), ("m", ">", 8, "rt"), ("*", "*", 1, "A")]
     received = list(apply_rule(rule, parts))
     assert ("fg", {"x": (1, 5), "m": (1, 10)}) in received
     assert ("rt", {"x": (6, 10), "m": (9, 10)}) in received
