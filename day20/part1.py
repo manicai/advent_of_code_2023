@@ -50,7 +50,7 @@ class FlipFlop(Gate):
 
     def pulse(self, _ignore_source, is_high) -> list[tuple[str, str, bool]]:
         if is_high:
-            return []  #  Ignore high pulses
+            return []  # Ignore high pulses
 
         self.state = not self.state
         return [(output, self.name, self.state) for output in self.outputs]
@@ -138,10 +138,7 @@ def part1(data: list[str]) -> int:
         while pulses:
             gate, source, is_high = pulses.pop(0)
             counts[is_high] += 1
-            assert gate in circuit, f"Unknown gate {gate}"
-            next = circuit[gate].pulse(source, is_high)
-            # print(f"{gate} {is_high} -> {next}")
-            pulses.extend(next)
+            pulses.extend(circuit[gate].pulse(source, is_high))
 
     return counts[True] * counts[False]
 

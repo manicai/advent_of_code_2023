@@ -9,13 +9,13 @@ import numpy
 
 
 import aoc
-from day20.part1 import *
+from day20.part1 import build_circuit, parse_circuit
 
 
 def part2(data: list[str]) -> int:
-    # By inspect "rx" gets input from one gate, the inputs to that gate
+    # By inspection "rx" gets input from one gate, the inputs to that gate
     # are on a cycle. So we need to find the cycle length of each input
-    # and multiple together.
+    # and multiply together.
     circuit = build_circuit(parse_circuit(data))
     # We could just manually inspect the circuit to find the input to rx
     assert len(circuit["rx"].inputs) == 1, "Expected rx to have 1 input"

@@ -22,7 +22,7 @@ def test_apply_rule_simple():
     assert ("A", {"x": (6, 10), "m": (1, 10)}) in received
 
 
-def test_apply_rule_simple():
+def test_apply_rule_less_simple():
     parts = {"x": (1, 10), "m": (1, 10)}
     rule = [("x", "<", 6, "fg"), ("m", ">", 8, "rt"), ("*", "*", 1, "A")]
     received = list(apply_rule(rule, parts))
