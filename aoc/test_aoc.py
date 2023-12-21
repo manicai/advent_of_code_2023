@@ -22,3 +22,15 @@ def test_circular():
 def test_transpose():
     block = ["123", "456", "789"]
     assert transpose(block) == ["147", "258", "369"]
+
+
+@pytest.mark.parametrize("n, expected", [
+    (169, [13, 13]),
+    (24, [2, 2, 2, 3]),
+    (4, [2, 2]),
+    (7, [7]),
+    (131, [131]),
+    (32, [2, 2, 2, 2, 2]),
+])
+def test_factorize(n, expected):
+    assert factorize(n) == expected

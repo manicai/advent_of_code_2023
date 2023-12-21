@@ -31,3 +31,11 @@ NORTH = (-1, 0)
 SOUTH = (1, 0)
 EAST = (0, 1)
 WEST = (0, -1)
+
+
+def factorize(n):
+    factors = []
+    for i in range(2, n // 2 + 1):
+        if n % i == 0:
+            return [i] + factorize(n // i)
+    return [n]
