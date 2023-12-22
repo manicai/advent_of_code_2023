@@ -58,9 +58,8 @@ def print_marked_grid(grid, locations):
         print()
 
 
-def part1(data: list[str]) -> int:
-    locations = find_locations(data, 64)
-    print_marked_grid(data, locations)
+def part1(data: list[str], steps=65) -> int:
+    locations = find_locations(data, steps)
     return len(locations)
 
 
