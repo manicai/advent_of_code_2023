@@ -8,6 +8,7 @@ import bs4
 import aoc
 
 standard_imports = """
+import collections
 import functools
 import itertools
 import math
