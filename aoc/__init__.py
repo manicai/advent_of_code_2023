@@ -15,7 +15,7 @@ def today():
 
 
 def download_input(day=today(), year=year()):
-    if os.path.exists(cached_input()):
+    if os.path.exists(cached_input(day)):
         print("Input data already cached, no download required")
         return
 
@@ -27,7 +27,7 @@ def download_input(day=today(), year=year()):
     assert (
         response.status_code == 200
     ), f"Got error {response.status_code}: {response.text}"
-    with open(cached_input(), "w", encoding="ascii") as fh:
+    with open(cached_input(day), "w", encoding="ascii") as fh:
         fh.write(response.text)
 
 
