@@ -29,9 +29,10 @@ def parse_line(line):
 
 
 def part1(data: list[str]) -> int:
-    particles = map(parse_line, data)
-
+    particles = list(map(parse_line, data))
     count = 0
+    found = {p: False for p in particles}
+
     for p, q in itertools.combinations(particles, 2):
         (p_x, p_y, _), (v_x, v_y, _) = p
         (q_x, q_y, _), (u_x, u_y, _) = q
@@ -39,21 +40,21 @@ def part1(data: list[str]) -> int:
         # print(f"Checking {p}, {q}")
         det = v_x * u_y - v_y * u_x
         if det == 0:
-            # print(f"Parallel")
             continue
 
         t_q = (v_x * (p_y - q_y) - v_y * (p_x - q_x)) / det
         t_p = (u_x * (p_y - q_y) - u_y * (p_x - q_x)) / det
         if t_q < 0 or t_p < 0:
-            # print(f"Crossed in past")
+            # Crossed in past
             continue
 
         x, y = (p_x + t_p * v_x, p_y + t_p * v_y)
         if in_zone(x, y):
-            # print(f"Collision at {x}, {y}")
+            found[p] = True
+            found[q] = True
             count += 1
         else:
-            # print("Collision outside zone")
+            # Collision outside zone
             continue
 
     return count
