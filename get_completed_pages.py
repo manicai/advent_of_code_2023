@@ -42,7 +42,7 @@ def download_problem(day=aoc.today(), year=aoc.year()):
 
 def run_script():
     today = aoc.today()
-    for day in range(1, today + 1):
+    for day in range(1, min(26, today + 1)):
         download_problem(day)
 
 
