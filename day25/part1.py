@@ -15,7 +15,7 @@ LEFT = ["xzz", "vkd", "xxq"]
 RIGHT = ["kgl", "qfb", "hqq"]
 
 
-def convert_to_graphvix(data):
+def convert_to_graphwiz(data):
     for line in data:
         prefix, suffix = line.split(":")
         for target in suffix.strip().split(" "):
@@ -39,7 +39,7 @@ def part1(data: list[str]) -> int:
     for line in data:
         prefix, suffix = line.split(":")
         for target in suffix.strip().split(" "):
-            # Nodes to cut found my
+            # Nodes to cut found by inspection
             if prefix in LEFT and target in RIGHT:
                 print(f"{prefix} -> {target}")
                 continue

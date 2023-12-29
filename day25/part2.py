@@ -14,7 +14,7 @@ import day25.part1 as part1
 
 
 def part2(data: list[str]) -> int:
-    pass
+    return "Press the big red button"
 
 
 if __name__ == "__main__":
