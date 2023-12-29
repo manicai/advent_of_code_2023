@@ -12,5 +12,4 @@ def test_min_cut():
     edges.append(("A1", "B1"))
 
     cut = repeat_karger(edges)
-    print(cut)
-    assert False
+    assert len(cut) == 2

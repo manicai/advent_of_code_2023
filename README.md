@@ -28,7 +28,7 @@ Day 22: Tetris block stacks, fun.
 
 Day 24: I get the impression from Reddit this may become infamous. It certainly took me the longest. I got the simultaneous non-linear equations quickly enough but wasn't sure how to solve them. After trying to think of analytical or clever algorithms for too long I just decided to brute force by assuming y and z velocities were roughly the same as the hailstones and solving for everything else (the range of x values was in the input was larger). Using symbolic solvers never occurred to me, nor did the cleverer cross product trick (change of reference frame) to make the equations more manageable. I'm pleased I found a simple Python solution rather than having to resorted to specialist maths tools with Sympy, Mathematica or Z3.
 
-Day 25: I cheated ;-). I know there are algorithms to find the wires to cut but it was Christmas day so I didn't want to spend much time on it. I dumped the network into Graphviz and manually looked at the resulting image to find the wires to cut. Then I wrote code to work out the partition sizes with those wires excluded. I'll go back and implement this properly at some point.
+Day 25: I cheated ;-). I know there are algorithms to find the wires to cut but it was Christmas day so I didn't want to spend much time on it. I dumped the network into Graphviz and manually looked at the resulting image to find the wires to cut. Then I wrote code to work out the partition sizes with those wires excluded. Since then I've gone back and implemented it fully programmatically, first by writing Karger's algorithm, then after looking at Reddit using the NetworkX library implementation of the Stoer–Wagner algorithm which makes it completely (boringly) trivial.
 
 
 ## The Code
