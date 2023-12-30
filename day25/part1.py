@@ -17,29 +17,13 @@ import aoc
 # RIGHT = ["kgl", "qfb", "hqq"]
 
 
-def reachable(neighbors, start):
-    visited = set()
-    queue = [start]
-    while queue:
-        node = queue.pop()
-        if node in visited:
-            continue
-        visited.add(node)
-        queue.extend(neighbors[node])
-    return visited
-
-
 def karger(edges):
-    # print(edges)
     working_edges = edges.copy()
     Vertices = set(v for v, _ in edges)
     Vertices.update(v for _, v in edges)
     merged = {v: {v} for v in Vertices}
-    # print("Vertices = ", Vertices)
     while len(Vertices) > 2:
         edge = random.choice(working_edges)
-        # print("Remove edge = ", edge)
-        # print("Vertices = ", Vertices)
         Vertices.remove(edge[1])
         merged[edge[0]].update(merged[edge[1]])
         del merged[edge[1]]
@@ -52,8 +36,6 @@ def karger(edges):
 
     cut_edges = []
     super_node_a, super_node_b = merged.values()
-    # print("Super nodes A = ", super_node_a)
-    # print("Super nodes B = ", super_node_b)
     for edge in edges:
         if (edge[0] in super_node_a and edge[1] in super_node_b) or (
             edge[0] in super_node_b and edge[1] in super_node_a
@@ -63,47 +45,38 @@ def karger(edges):
         working_edges
     ), f"{len(cut_edges)} != {len(working_edges)}"
 
-    return cut_edges
+    return cut_edges, [super_node_a, super_node_b]
 
 
 def repeat_karger(edges, n=50, target_size=None):
     min_cut = None
+    min_cut_partition = None
     for _ in range(n):
-        cut = karger(edges)
+        cut, partition = karger(edges)
         if min_cut is None or len(cut) < len(min_cut):
             min_cut = cut
+            min_cut_partition = partition
         if target_size is not None and len(min_cut) <= target_size:
             break
-    return min_cut
+    return min_cut, min_cut_partition
 
 
 def part1(data: list[str]) -> int:
-    neighbors = collections.defaultdict(set)
     edges = []
     for line in data:
         prefix, suffix = line.split(":")
         for target in suffix.strip().split(" "):
             # Nodes to cut found by inspection
             edges.append((prefix, target))
-            neighbors[prefix].add(target)
-            neighbors[target].add(prefix)
 
+    known_size = 3  # Problem statement says there is a cut of size 3
     while True:
-        cut = repeat_karger(edges, target_size=3)
-        print("Cut = ", cut)
-        if len(cut) == 3:  # Problem statement says there is a cut of size 3
+        cut, partition = repeat_karger(edges, target_size=known_size)
+        print("Cut", cut, "too large" if len(cut) > known_size else "found")
+        if len(cut) == known_size:
             break
 
-    print("Size = ", len(neighbors))
-    for node_a, node_b in cut:
-        neighbors[node_a].remove(node_b)
-        neighbors[node_b].remove(node_a)
-
-    left_start, right_start = cut[0]
-    left = reachable(neighbors, left_start)
-    right = reachable(neighbors, right_start)
-    assert len(left) + len(right) == len(neighbors)
-    return len(left) * len(right)
+    return math.prod(len(p) for p in partition)
 
 
 if __name__ == "__main__":
